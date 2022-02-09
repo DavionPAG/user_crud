@@ -14,7 +14,7 @@ def output_formatter(results):
 
 def insert(first_name, last_name, hobbies=None, active=1):
   value_tuple = (first_name, last_name, hobbies, active)
-  query = """"
+  query = """
     INSERT INTO user (
       first_name,
       last_name,
@@ -62,6 +62,14 @@ def deactivate_user(pk):
   cursor = get_db()
   cursor.execute(
     "UPDATE user SET active=0 WHERE id=?", (pk, )
+  )
+  cursor.commit()
+  cursor.close()
+
+def activate_user(pk):
+  cursor = get_db()
+  cursor.execute(
+    "UPDATE user SET active=1 WHERE id=?", (pk, )
   )
   cursor.commit()
   cursor.close()

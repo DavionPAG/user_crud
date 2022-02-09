@@ -1,0 +1,8 @@
+ul {
+  display: flex;
+  flex: 3
+}
+
+li {
+  border-bottom: 2px;
+}

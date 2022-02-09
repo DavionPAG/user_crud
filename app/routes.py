@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, render_template, request
 from datetime import datetime
 import json
 
@@ -25,7 +25,7 @@ def create_user():
     user_data.get('hobbies')
   )
   out = {'new_id': new_id}
-  return out
+  return out, 201
 
 @app.get('/users')
 def get_users():
@@ -48,9 +48,18 @@ def update_user(pk):
     user_data.get('last_name'),
     user_data.get('hobbies')
   )
-  return 204
+  return '', 204
 
 @app.delete('/users/<int:pk>')
 def deactivate_user(pk):
   user.deactivate_user(pk)
-  return 204
+  return '', 204
+
+@app.put('/users/<int:pk>/activate')
+def activate_user(pk):
+  user.activate_user(pk)
+  return '', 204
+
+@app.get('/')
+def index():
+  return render_template('index.html')
